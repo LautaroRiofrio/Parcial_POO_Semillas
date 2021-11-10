@@ -1,0 +1,37 @@
+import plantas.*
+
+
+describe "menta"{
+	const menta1 = new Menta(anoObtencion = 2005, altura = 1 )
+	const menta2 = new Menta(anoObtencion = 2005, altura = 0.3 )
+	test "Menta" {
+		
+		assert.equals(menta1.daSemillas(), true)
+		assert.equals(menta2.daSemillas(), false)
+	}
+}
+
+
+describe "soja"{
+	const soja = new Soja(anoObtencion = 2009, altura = 0.6)
+	test "Soja"{
+		assert.equals(soja.getHorasDeSol(), 7)
+		assert.equals(soja.daSemillas(), false)
+		assert.equals(soja.cuantoEspacioOcupa(), 0.3)
+	}
+}
+
+
+
+describe "quinoa"{
+	const quinoa1 = new Quinoa(anoObtencion = 2010, altura = 999)
+	const quinoa2 = new Quinoa(anoObtencion = 2001, altura = 999)
+	method initialize(){
+		quinoa1.setHorasDeSol(12)
+		quinoa2.setHorasDeSol(9)
+	}
+	test "quinoa"{
+		assert.equals(quinoa1.daSemillas(), true)
+		assert.equals(quinoa2.daSemillas(), true)
+	}
+}

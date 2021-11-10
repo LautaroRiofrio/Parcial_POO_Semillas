@@ -1,0 +1,75 @@
+import plantas.*
+import parcelas.*
+
+
+describe "parcelas 1"{
+	const parcela = new Parcela(ancho = 20, largo = 1, horasDeSolPorDia = 8)	
+	
+	test "superficie parcela"{
+		assert.equals(parcela.superficie(), 20)
+	}
+	test "cantidad maxima"{
+		assert.equals(parcela.cantMaxima(), 4)
+	}
+}
+
+
+describe "parcelas 2"{
+	const parcela = new Parcela(ancho = 20, largo = 1, horasDeSolPorDia = 8)	
+	
+	const soja1 = new Soja(anoObtencion = 20, altura = 1)
+	const soja2 = new Soja(anoObtencion = 20, altura = 1)
+	const soja3 = new Soja(anoObtencion = 20, altura = 1)
+	const soja4 = new Soja(anoObtencion = 20, altura = 1)
+	
+	const soja5 = new Soja(anoObtencion = 20, altura = 1)
+	
+	method initialize(){
+		parcela.plantar(soja1)
+		parcela.plantar(soja2)
+		parcela.plantar(soja3)
+		parcela.plantar(soja4)
+	}
+	
+	test "error por plantar 5ta planta"{
+		assert.throwsException{ parcela.plantar(soja5) }
+	}
+}
+
+
+
+
+
+
+
+describe "parcelas ideales"{
+	const parcelaParaMenta = new Parcela(ancho = 36, largo = 5, horasDeSolPorDia = 999)
+	const parcelaParaQuinoa= new Parcela(ancho = 36, largo = 5, horasDeSolPorDia = 9)
+	const parcelaParaSojaComun = new Parcela(ancho = 36, largo = 5, horasDeSolPorDia = 9)
+	const parcelaParaSojaTransgenica= new Parcela(ancho = 5, largo = 1, horasDeSolPorDia = 999)
+	
+	const menta = new Menta(anoObtencion = 2000, altura = 1)
+	const quinoa = new Quinoa(anoObtencion = 2000, altura = 1)
+	const sojaComun = new Soja(anoObtencion = 2000, altura = 50)
+	const sojaTransgenica = new SojaTransgenica(anoObtencion = 2000, altura = 1)
+	
+	method initialize(){
+		
+	}
+	
+	test "Menta"{
+		assert.equals(menta.esParcelaIdeal(parcelaParaMenta), true)
+	}
+	test "Quinoa"{
+		assert.equals(quinoa.esParcelaIdeal(parcelaParaQuinoa), true)
+		parcelaParaQuinoa.plantar( sojaComun )
+		assert.equals(quinoa.esParcelaIdeal(parcelaParaQuinoa), false)
+	}
+	test "Soja comun"{
+		assert.equals(sojaComun.esParcelaIdeal(parcelaParaSojaComun), true)
+	}
+	test "Soja transgenica"{
+		assert.equals(sojaTransgenica.esParcelaIdeal(parcelaParaSojaTransgenica), true)
+	}
+}
+

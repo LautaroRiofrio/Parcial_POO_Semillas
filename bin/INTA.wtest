@@ -1,0 +1,47 @@
+import plantas.*
+import parcelas.*
+import INTA.*
+
+describe "Test INTA"{
+	const parcela1 = new ParcelaEcologica(ancho = 50, largo = 4, horasDeSolPorDia = 1)
+	const parcela2 = new ParcelaEcologica(ancho = 50, largo = 4, horasDeSolPorDia = 6)
+	const parcela3 = new ParcelaIndustrial(ancho = 50, largo = 4, horasDeSolPorDia = 6)
+	const parcela4 = new ParcelaIndustrial(ancho = 50, largo = 4, horasDeSolPorDia = 2)
+	const parcela5 = new ParcelaIndustrial(ancho = 50, largo = 4, horasDeSolPorDia = 2)
+	
+	
+	const planta1 = new Menta(anoObtencion = 2005, altura = 1)
+	const planta2 = new Menta(anoObtencion = 2005, altura = 1)
+	const planta3 = new Quinoa(anoObtencion = 2005, altura = 1)
+	const planta4 = new Quinoa(anoObtencion = 2005, altura = 1)
+	const planta5 = new Hierbabuena(anoObtencion = 2005, altura = 1)
+	
+	const lista = []
+	
+	method initialize(){
+		planta3.setHorasDeSol(25)
+		planta4.setHorasDeSol(25)
+		lista.addAll(
+			[parcela1,parcela2,parcela3,parcela4,parcela5]
+		)
+		lista.map( {
+			e =>
+			e.plantar(planta1)
+			e.plantar(planta2)
+			e.plantar(planta3)
+			e.plantar(planta4)
+			e.plantar(planta5)
+			return true
+		} )
+		
+		lista.map({ e => inta.agregarParcela(e) return true})
+	}	
+	
+	test "promedio"{
+		assert.equals(inta.promedioPlantasXParcela(), 5)
+	}
+	
+	test "parcela mas autosustentable"{
+		assert.equals(inta.parcelaMasAutosustentable() , parcela1)
+	}
+}
